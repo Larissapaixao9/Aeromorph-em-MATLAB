@@ -72,3 +72,16 @@ function [] = AeroMorph_v506()
     exit_button = uicontrol('Parent',subframe2,'Style','pushbutton','String','Exit Editor','Position',[10,10,150,20],'BackgroundColor',[.8 .8 .8],'Callback',@exit_editor,'FontName','@Arial Unicode MS','FontUnits','points','FontSize',10,'FontWeight','Bold');
 
  %Column 2
+    uicontrol('Parent',subframe2,'Style','text','String','Input_Filename','Position',[170,190,150,20],'BackgroundColor',[1 1 1],'FontName','@Arial UnicodeMS','FontUnits','points','FontSize',10,'FontWeight','Bold');
+    filename_load = uicontrol('Parent',subframe2,'Style','edit','String','lrn1015','Position',[170,170,150,20],'BackgroundColor','White');
+    filename_load_button = uicontrol('Parent',subframe2,'Style','pushbutton','String','Load Airfoil','Position',[170,150,150,20],'BackgroundColor',[.8 .8 .8],'Callback',@load_airfoil,'FontName','@Arial Unicode MS','FontUnits','points','FontSize',10,'FontWeight','Bold');
+
+    uicontrol('Parent',subframe2,'Style','text','String','Editor_Output','Position',[170,130,150,20],'BackgroundColor',[1 1 1],'FontName','@Arial UnicodeMS','FontUnits','points','FontSize',10,'FontWeight','Bold');
+    filename_edit = uicontrol('Parent',subframe2,'Style','edit','String','lrn1015-AM','Position',[170,110,150,20],'BackgroundColor','White');
+    save_output_button = uicontrol('Parent',subframe2,'Style','pushbutton','String','Save Airfoil','Position',[170,90,150,20],'BackgroundColor',[.8 .8 .8],'Callback',@saveoutput,'FontName','@Arial Unicode MS','FontUnits','points','FontSize',10,'FontWeight','Bold');
+
+    zoom_in_button = uicontrol('Parent',subframe2,'Style','pushbutton','String','Zoom on Leading','Position',[170,50,150,20],'BackgroundColor',[.8 .8 .8],'Callback',@zoom_leading,'FontName','@Arial Unicode MS','FontUnits','points','FontSize',10,'FontWeight','Bold');
+    zoom_out_button = uicontrol('Parent',subframe2,'Style','pushbutton','String','Zoom Out','Position',[170,30,150,20],'BackgroundColor',[.8 .8 .8],'Callback',@zoom_out,'FontName','@Arial Unicode MS','FontUnits','points','FontSize',10,'FontWeight','Bold');
+    help_button = uicontrol('Parent',subframe2,'Style','pushbutton','String','Open Help','Position',[170,10,150,20],'BackgroundColor',[.8 .8 .8],'Callback',@open_help,'FontName','@Arial Unicode MS','FontUnits','points','FontSize',10,'FontWeight','Bold');
+
+ %Column 3
