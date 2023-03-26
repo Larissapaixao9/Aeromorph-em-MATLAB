@@ -653,7 +653,7 @@ function [] = AeroMorph_v506()
         output=[xc,yc];
         save(strcat('airfoils','\',run_filename,'.dat'),'output','-ASCII');
 
-        int_run_list=char('load',strcat('..\..\airfoils\',airfoil1,'.dat'),airfoil1,'inte','c','f',strcat('..\..\airfoils\',airfoil2,'.dat'),int_factor,strcat(airfoil1,'+',int_factor,airfoil2),'pcop','save',strcat('..\..\airfoils\',a1,'+',int_factor,a2,'.dat'),'','','quit');657fid = fopen(strcat('xfoil6.96\bin\morph.run'),'
+        int_run_list=char('load',strcat('..\..\airfoils\',airfoil1,'.dat'),airfoil1,'inte','c','f',strcat('..\..\airfoils\',airfoil2,'.dat'),int_factor,strcat(airfoil1,'+',int_factor,airfoil2),'pcop','save',strcat('..\..\airfoils\',a1,'+',int_factor,a2,'.dat'),'','','quit');
         fid = fopen(strcat('xfoil6.96\bin\morph.run'),'wt');
         for i = 1:size(int_run_list,1)
             fprintf(fid,'%s\n',int_run_list(i,:));
