@@ -780,7 +780,49 @@ function [] = AeroMorph_v506()
     end
 %
 %
-
+    function [eff] = ga_fit(t_s)
+        run_filename = get(filename_edit,'String');
+        Mach = get(ga_mach_value,'String');
+        Re = get(ga_re_value,'String');
+        Cl = get(ga_cl_value,'String');
+        set_thickness2(t_s(1));
+        sweep_wing(t_s(2));
+        dir = cd;
+        output=[xc,yc];
+        save(strcat('airfoils\gen.dat'),'output','-ASCII')
+        run_list=char('plop','g','','load','..\..\airfoils\gen.dat','gen','oper','iter','100','visc',Re,'mach',Mach,'pacc','..\..\polars\ga\gen.txt','','cl',Cl,'!','!','!','!','!','!','pacc','','','quit');
+        fid = fopen(strcat('xfoil6.96\bin\gen.run'),'wt');
+        for i = 1:size(run_list,1)
+            fprintf(fid,'%s\n',run_list(i,:));
+        end
+        fclose(fid);
+        fname=strcat('polars\ga\gen.txt');
+        bat_file=char(['cd ','xfoil6.96\bin'],strcat('xfoil <gen.run'));
+        fid = fopen('run.bat','wt');
+        for i = 1:size(bat_file,1)
+            fprintf(fid,'%s\n',bat_file(i,:));
+        end
+        fclose(fid);
+        dos run.bat;
+        fid = fopen(fname);
+        C = textscan(fid, '%f %f %f %f %f %f %f','HeaderLines',12);
+        fclose(fid);
+        if length(C{2})>=1
+            CL = C{2}(1);
+            CD = C{3}(1);
+        else
+            CL = 0;
+            CD = 1;
+        end
+        reset_airfoil();
+        ga_progress=ga_progress+1;
+        ga_progressbar = waitbar(ga_progress/ga_total);
+        delete('airfoils\gen.dat','polars\ga\gen.txt','xfoil6.96\bin\gen.run')
+        eff = 500-CL/CD;
+    end
+%
+%
+end
 
 
 
