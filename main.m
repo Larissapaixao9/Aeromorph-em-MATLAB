@@ -175,7 +175,8 @@ uicontrol('Parent',topfig,'Style','text','String',strcat([char(169) '2008-2009 C
 
 %GA Figure
 
-    ga_fig = figure('Name','AeroMorph v.5.0|GASolver','NumberTitle','off','Position',[(sz(3)-374)/2 (sz(4)-320)/2 374320],'MenuBar','None','Visible','off');
+    ga_fig = figure('Name','AeroMorph v.5.0|GASolver','NumberTitle','off','Position',[(sz(3)-374)/2 (sz(4)-320)/2 374, 320],'MenuBar','None','Visible','off');
+    %ga_fig = figure('Name','AeroMorph v.5.0|GASolver','NumberTitle','off','Position',[(sz(3)-374)/2 (sz(4)-320)/2 374320],'MenuBar','None','Visible','off');
     set(ga_fig, 'color', [0 0 0]);%[.2 .4 1]
     ga_frame1 = uipanel('Parent',ga_fig,'Position',[.025 .025 .95 .95],'BackgroundColor',[.85 0 0]);
     ga_frame2 = uipanel('Parent',ga_frame1,'Position',[.025 .025 .95 .95],'BackgroundColor',[1 1 1]);
@@ -206,14 +207,22 @@ uicontrol('Parent',topfig,'Style','text','String',strcat([char(169) '2008-2009 C
     write_log('load')
 %
 %
+    % function [] = saveoutput(save_output_button,eventdata)
+    %     dir = cd;
+    %     airfoildir = strcat(dir,'\airfoils');
+    %     output_filename = get(filename_edit,'String');
+    %     output=[xc,yc];
+    %     save(strcat(airfoildir,'\',strcat(output_filename,'.dat')),'output','-ASCII')
+    %     write_log('save')
+    % end
     function [] = saveoutput(save_output_button,eventdata)
-        dir = cd;
-        airfoildir = strcat(dir,'\airfoils');
-        output_filename = get(filename_edit,'String');
-        output=[xc,yc];
-        save(strcat(airfoildir,'\',strcat(output_filename,'.dat')),'output','-ASCII')
-        write_log('save')
-    end
+    current_dir = pwd;
+    airfoil_dir = fullfile(current_dir, 'airfoils');
+    output_filename = 'output.dat'; % or use get(filename_edit, 'String')
+    output = [xc, yc]; % xc and yc are assumed to be defined
+    output_filepath = fullfile(airfoil_dir, output_filename);
+    dlmwrite(output_filepath, output, '-ASCII');
+end
 %
 %
     function [] = exit_editor(exit_button,eventdata)
